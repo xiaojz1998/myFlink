@@ -1,0 +1,12 @@
+{"ts":1731739649180,"url":"/pay","user":"Wangwu"}
+{"ts":1731739650130,"url":"/list","user":"Wangwu"}
+{"ts":1731739651129,"url":"/list","user":"Jerry"}
+{"ts":1731739652144,"url":"/pay","user":"Zhangsan"}
+{"ts":1731739653130,"url":"/list","user":"Tom"}
+{"ts":1731739654129,"url":"/cart","user":"Zhangsan"}
+{"ts":1731739655144,"url":"/pay","user":"Tom"}
+{"ts":1731739656129,"url":"/pay","user":"Zhangsan"}
+{"ts":1731739657139,"url":"/cart","user":"Tom"}
+{"ts":1731739658135,"url":"/home","user":"Tom"}
+{"ts":1731739659128,"url":"/home","user":"Jerry"}
+{"ts":1731739660139,"url":"/list","user":"Jerry"}
