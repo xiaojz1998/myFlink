@@ -1,0 +1,17 @@
+Zhangsan,/home,1000
+Lisi,/cart,2000
+Zhangsan,/home,1500
+Lisi,/cart,2500
+WangWu,/detail,3000
+WangWu,/cart,3001
+Zhangsan,/cart,10000
+Zhangsan,/list,4000
+Tom,/cart,5000
+Zhangsan,/home,8000
+Lisi,/cart,10000
+Tom,/cart,10001
+Zhangsan,/home,12000
+Zhangsan,/home,13000
+Zhangsan,/home,14000
+Zhangsan,/home,15000
+Zhangsan,/home,16000
