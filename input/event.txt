@@ -3,3 +3,4 @@ Lisi,/cart,2000
 WangWu,/detail,3000
 Zhangsan,/list,4000
 Tom,/cart,5000
+zhangsan,/home,6000
