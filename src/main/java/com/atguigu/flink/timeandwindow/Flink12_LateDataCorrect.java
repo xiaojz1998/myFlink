@@ -1,6 +1,5 @@
 package com.atguigu.flink.timeandwindow;
 
-import com.atguigu.flink.datasteamapi.sink.Flink04_JdbcSink;
 import com.atguigu.flink.pojo.Event;
 import com.atguigu.flink.pojo.UrlViewCount;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;

@@ -16,6 +16,9 @@ import org.apache.flink.util.Collector;
 
 import java.time.Duration;
 
+// withIdleness 在延迟一段时间后没有数据就不会往下游广播水位线
+//	 用的是现实中的处理时间，而不是事件时间
+// 防止水位线堵塞，窗口无法计算
 public class Flink13_withIdleness {
     public static void main(String[] args) {
 

@@ -24,7 +24,6 @@ import java.sql.SQLException;
 import java.time.Duration;
 
 /**
- *
  * 编程题:
  *从Kafka topicA 主题中读取Event数据(json格式或者csv格式) ,
  *统计每10秒内每个URL的点击次数，将结果写出到Mysql url_view_count表中。
