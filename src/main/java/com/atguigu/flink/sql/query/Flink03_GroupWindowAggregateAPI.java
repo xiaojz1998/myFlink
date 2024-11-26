@@ -58,8 +58,9 @@ public class Flink03_GroupWindowAggregateAPI {
                 .column("vc" ,"INT")
                 .column("ts" , "BIGINT")
                 .columnByExpression("pt","PROCTIME()")
+                //
                 .columnByExpression("et","TO_TIMESTAMP_LTZ(ts,3)")
-                .columnByExpression("et","et - INTERVAL '0' SECOND")
+                .watermark("et","et - INTERVAL '0' SECOND")
                 .build();
         Table table = streamTableEnv.fromDataStream(ds, schema);
         // Table API

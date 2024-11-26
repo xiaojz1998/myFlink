@@ -69,6 +69,6 @@ public class BoundedOutOfOrdernessWatermarks<T> implements WatermarkGenerator<T>
         Watermark watermark = new Watermark(maxTimestamp - outOfOrdernessMillis - 1);
         output.emitWatermark(watermark);
 
-        System.out.println("Flink onPeriodicEmit ==> 发射水位线: " + watermark);
+        //System.out.println("Flink onPeriodicEmit ==> 发射水位线: " + watermark);
     }
 }
