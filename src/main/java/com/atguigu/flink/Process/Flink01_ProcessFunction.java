@@ -1,5 +1,6 @@
 package com.atguigu.flink.Process;
 
+import com.alibaba.fastjson.JSON;
 import com.atguigu.flink.pojo.Event;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.TimerService;
@@ -76,24 +77,43 @@ public class Flink01_ProcessFunction {
                                 TimerService timerService = context.timerService();
                                 // 处理时间定时器
                                 // 获取当前处理时间
-                                long currentProcessingTime = timerService.currentProcessingTime();
-                                System.out.println("processElement ==> 当前的处理时间为: " + currentProcessingTime);
+                                //long currentProcessingTime = timerService.currentProcessingTime();
+                                //System.out.println("processElement ==> 当前的处理时间为: " + currentProcessingTime);
                                 // 注册5s后的定时器
-                                long timerTime = currentProcessingTime + 5000L;
-                                timerService.registerProcessingTimeTimer(timerTime);
-                                System.out.println("processElement ==> 注册了处理时间定时器: " + timerTime);
+                                //long timerTime = currentProcessingTime + 5000L;
+                                //timerService.registerProcessingTimeTimer(timerTime);
+                                //System.out.println("processElement ==> 注册了处理时间定时器: " + timerTime);
 
+
+                                //事件时间定时器
+                                //获取当前数据的时间
+                                Long ts = event.getTs();
+                                System.out.println("processElement ==> 当前数据的时间为: " + ts);
+                                //注册5秒后的事件时间定时器
+                                Long timerTime = ts + 5000L;
+                                timerService.registerEventTimeTimer(timerTime);
+                                System.out.println("processElement ==> 注册了事件时间定时器: " + timerTime + " , 当前key: " + context.getCurrentKey());
+
+                                // 对输入数据进行处理
+                                // 输出
+                                collector.collect(JSON.toJSONString(event));
 
                             }
 
                             @Override
                             public void onTimer(long timestamp, KeyedProcessFunction<String, Event, String>.OnTimerContext ctx, Collector<String> out) throws Exception {
-                                System.out.println("onTimer ==> 当前触发的处理时间定时器为: " + timestamp);
+                                //System.out.println("onTimer ==> 当前触发的处理时间定时器为: " + timestamp);
+                                //TimerService timerService = ctx.timerService();
+                                //long currentProcessingTime = timerService.currentProcessingTime();
+                                //System.out.println("onTimer ==> 当前的处理时间为: " + currentProcessingTime);
+
+                                //当前key
+                                String currentKey = ctx.getCurrentKey();
+
+                                System.out.println("onTimer ==> 当前触发的事件时间定时器为: " + timestamp + " , 当前key: " + currentKey  );
                                 TimerService timerService = ctx.timerService();
-                                long currentProcessingTime = timerService.currentProcessingTime();
-                                System.out.println("onTimer ==> 当前的处理时间为: " + currentProcessingTime);
-
-
+                                long currentWatermark = timerService.currentWatermark();
+                                System.out.println("onTimer ==> 当前的事件时间(水位线)为: " + currentWatermark);
                             }
                         }
                 );
