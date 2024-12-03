@@ -71,10 +71,14 @@ public class Flink02_KafkaSink {
                                 .build()
                 )
                 // 配置应答级别 默认是AT_LEAST_ONCE
+                // 想要开启事务（两阶段提交）必须要是.EXACTLY_ONCE，可以看源码，源码中开启了事务
+                // 开启事务后，消费端要设置隔离级别，消费端默认值是读未提交
                 .setDeliveryGuarantee(DeliveryGuarantee.AT_LEAST_ONCE)
                 //.setDeliveryGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
                 // 配置生产者事务超时时间 在应答级别是exactly_once的时候，必须配置，否则报错
+                // 事务超时时间要超过检查点超时时间env.enableCheckpointing(3000L)，要小于=kafka集群配置的事务超时时间
                 .setProperty(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, "600000")
+                // 设置事务id前缀，保持唯一性
                 .setTransactionalIdPrefix("flink-" + System.currentTimeMillis())
                 .build();
         mapDs.sinkTo(kafkaSink);
